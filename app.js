@@ -62,7 +62,7 @@ function showWelcomeScreen() {
 
             <h1>
                 LAS 7<br>
-                MENTALIDADES
+                MENTALIDADES -TESTEANDO DE NUEVO-
             </h1>
 
             <p>
