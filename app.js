@@ -57,12 +57,12 @@ function showWelcomeScreen() {
         <div class="screen-content">
 
             <div class="logo">
-                - EVENTO MASIZO PUES -
+                EVENTO
             </div>
 
             <h1>
                 LAS 7<br>
-                MENTALIDADES
+                MENTALIDADES (DE TIBURONCIN UJA UJA)
                 
             </h1>
 
