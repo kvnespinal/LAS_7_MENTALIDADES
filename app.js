@@ -57,7 +57,7 @@ function showWelcomeScreen() {
         <div class="screen-content">
 
             <div class="logo">
-                - EVENTO -
+                - EVENTO MASIZO PUES -
             </div>
 
             <h1>
