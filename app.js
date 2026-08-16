@@ -9,38 +9,38 @@ const user = {
 
 const challenges = [
     {
-        challenge: "Ventas bajas",
-        mindset: "Optimismo"
+        challenge: "VENTAS BAJAS",
+        mindset: "OPTIMISMO"
     },
 
     {
-        challenge: "Competencia",
-        mindset: "Mentalidad competitiva"
+        challenge: "COMPETENCIA",
+        mindset: "MENTALIDAD COMPETITIVA"
     },
 
     {
-        challenge: "Duda",
-        mindset: "Confianza"
+        challenge: "DUDA",
+        mindset: "CONFIANZA"
     },
 
     {
-        challenge: "Rechazo",
-        mindset: "Persistencia"
+        challenge: "RECHAZO",
+        mindset: "PERSISTENCIA"
     },
 
     {
-        challenge: "Cambio",
-        mindset: "Flexibilidad y Adaptabilidad"
+        challenge: "CAMBIO",
+        mindset: "FLEXIBILIDAD Y ADAPTABILIDAD"
     },
 
     {
-        challenge: "Desorden",
-        mindset: "Sistematización y Eficiencia"
+        challenge: "DESORDEN",
+        mindset: "SISTEMATIZACIÓN Y EFICIENCIA"
     },
 
     {
-        challenge: "Estancamiento",
-        mindset: "Sed de conocimiento y amor por enseñar"
+        challenge: "ESTANCAMIENTO",
+        mindset: "SED DE CONOCIMIENTO Y AMOR POR ENSEÑAR"
     }
 ];
 
@@ -99,10 +99,6 @@ function showNameScreen() {
             <h2>
                 COMENCEMOS
             </h2>
-
-            <p>
-                Escribe tu nombre y apellido
-            </p>
 
             <div class="form">
 
@@ -301,7 +297,7 @@ setTimeout(function () {
     processingMessage.textContent =
         "IDENTIFICANDO DESAFÍO...";
 
-}, 1500);
+}, 1200);
 
 
 setTimeout(function () {
@@ -309,7 +305,7 @@ setTimeout(function () {
     processingMessage.textContent =
         "DETERMINANDO MENTALIDAD...";
 
-}, 3000);
+}, 2000);
 
 
 setTimeout(function () {
@@ -317,13 +313,13 @@ setTimeout(function () {
     processingMessage.textContent =
         "GENERANDO ADQUISICIÓN...";
 
-}, 3000);
+}, 2000);
 
 setTimeout(function () {
 
     showMindsetResult();
 
-}, 4500);
+}, 3300);
 
 }
 
