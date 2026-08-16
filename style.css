@@ -1,0 +1,482 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+
+    background: #111111;
+    color: #ffffff;
+
+    font-family: Arial, sans-serif;
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+}
+
+#screen {
+    width: 100%;
+    height: 100%;
+}
+
+.screen-content {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 60px;
+}
+
+.logo {
+    font-size: 20px;
+    letter-spacing: 5px;
+
+    margin-bottom: 60px;
+
+    opacity: 0.7;
+}
+
+h1 {
+    font-size: 72px;
+    line-height: 0.95;
+
+    letter-spacing: -2px;
+}
+
+h2 {
+    font-size: 64px;
+    letter-spacing: -2px;
+}
+
+p {
+    margin-top: 25px;
+
+    font-size: 24px;
+    letter-spacing: 5px;
+
+    opacity: 0.7;
+}
+
+button {
+    margin-top: 80px;
+
+    padding: 25px 80px;
+
+    border: 1px solid #ffffff;
+
+    background: transparent;
+    color: #ffffff;
+
+    font-size: 22px;
+    letter-spacing: 3px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+button:hover {
+    background: #ffffff;
+    color: #111111;
+}
+
+button:active {
+    transform: scale(0.96);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    margin-top: 50px;
+}
+
+input {
+    width: 500px;
+
+    padding: 22px 25px;
+
+    border: 1px solid #555555;
+
+    background: #1a1a1a;
+    color: #ffffff;
+
+    font-size: 22px;
+
+    text-align: center;
+
+    outline: none;
+}
+
+input:focus {
+    border-color: #ffffff;
+}
+
+.challenge-grid {
+    width: min(1100px, 90%);
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 20px;
+
+    margin-top: 50px;
+}
+
+.challenge-button {
+    width: 100%;
+
+    min-height: 120px;
+
+    margin-top: 0;
+
+    padding: 25px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    text-align: left;
+
+    border: 1px solid #444444;
+
+    background: #171717;
+    color: #ffffff;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.challenge-button:hover {
+    background: #ffffff;
+    color: #111111;
+
+    border-color: #ffffff;
+
+    transform: translateY(-3px);
+}
+
+.challenge-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.challenge-subtitle {
+    margin-top: 10px;
+
+    font-size: 16px;
+
+    opacity: 0.6;
+}
+
+.challenge-button.selected {
+    background: #ffffff;
+    color: #111111;
+
+    border-color: #ffffff;
+
+    transform: scale(1.02);
+}
+
+#challengeContinueButton:disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+}
+
+#challengeContinueButton:not(:disabled) {
+    opacity: 1;
+}
+
+.section-label {
+    margin-top: 20px;
+
+    font-size: 16px;
+    letter-spacing: 5px;
+
+    opacity: 0.5;
+}
+
+.commitment-question {
+    margin-top: 80px;
+
+    font-size: 30px;
+    line-height: 1.3;
+    letter-spacing: 2px;
+
+    opacity: 1;
+}
+
+.processing-label {
+    font-size: 18px;
+    letter-spacing: 6px;
+
+    opacity: 0.5;
+
+    margin-bottom: 30px;
+}
+
+#processingMessage {
+    font-size: 32px;
+    letter-spacing: 3px;
+}
+
+.result-label {
+    font-size: 18px;
+    letter-spacing: 6px;
+
+    opacity: 0.5;
+}
+
+.mindset-result {
+    margin-top: 40px;
+
+    max-width: 1000px;
+
+    font-size: 80px;
+    line-height: 1;
+
+    letter-spacing: -2px;
+}
+
+.result-description {
+    max-width: 700px;
+
+    margin-top: 35px;
+
+    font-size: 20px;
+    line-height: 1.5;
+
+    opacity: 0.6;
+}
+
+.ticket-screen {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+}
+
+.ticket {
+    width: min(620px, 90vw);
+
+    max-height: 80vh;
+
+    overflow-y: auto;
+
+    background: #ffffff;
+    color: #111111;
+
+    padding: 35px;
+
+    font-family: "Courier New", monospace;
+
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.ticket-header {
+    text-align: center;
+}
+
+.ticket-logos {
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.ticket-header h2 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.ticket-header p {
+    margin-top: 10px;
+
+    font-size: 13px;
+    letter-spacing: 1px;
+
+    color: #111111;
+    opacity: 1;
+}
+
+.ticket-info {
+    margin-top: 30px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+
+    font-size: 13px;
+}
+
+.ticket-info strong {
+    display: block;
+
+    font-size: 11px;
+
+    margin-bottom: 3px;
+}
+
+.ticket-divider {
+    margin: 25px 0;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    font-size: 12px;
+}
+
+.ticket-section {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+
+    font-size: 13px;
+}
+
+.ticket-section strong {
+    font-size: 11px;
+}
+
+.ticket-highlight {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.mindset-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+
+    font-size: 12px;
+}
+
+.ticket-total {
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+
+    font-size: 12px;
+}
+
+.ticket-total div {
+    display: flex;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.ticket-total strong {
+    font-size: 11px;
+}
+
+.ticket-total .total {
+    margin-top: 10px;
+
+    padding-top: 15px;
+
+    border-top: 1px dashed #111111;
+
+    font-size: 18px;
+}
+
+.ticket-approved {
+    text-align: center;
+
+    font-size: 12px;
+}
+
+.ticket-approved strong {
+    display: block;
+
+    margin-bottom: 20px;
+
+    font-size: 16px;
+}
+
+.ticket-approved p {
+    margin-top: 10px;
+
+    font-size: 11px;
+
+    letter-spacing: 0;
+
+    color: #111111;
+
+    opacity: 1;
+}
+
+.ticket-footer {
+    margin-top: 30px;
+
+    padding-top: 20px;
+
+    border-top: 1px dashed #111111;
+
+    text-align: center;
+
+    font-size: 11px;
+}
+
+.ticket-footer p {
+    margin: 0;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+    color: #111111;
+
+    opacity: 1;
+
+    letter-spacing: 0;
+}
+
+.ticket-footer span {
+    display: block;
+
+    margin-top: 10px;
+}
+
+#ticketContinueButton {
+    margin-top: 25px;
+}
+
+.success-icon {
+    font-size: 80px;
+    margin-bottom: 30px;
+}
+
+.success-message {
+    margin-top: 25px;
+    font-size: 22px;
+    letter-spacing: 2px;
+}
