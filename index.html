@@ -27,9 +27,6 @@
     <script src="app.js"></script>
 
 <script>
-    
-    const CURRENT_VERSION = "1.0.1";
-
     async function checkForUpdates() {
 
         try {
@@ -41,43 +38,66 @@
             if (!response.ok) return;
 
             const remoteData = await response.json();
+            const remoteVersion = remoteData.version;
 
-            if (remoteData.version !== CURRENT_VERSION) {
+            const lastVersion =
+                localStorage.getItem("las7_version");
 
-                console.log(
-                    "Nueva versión disponible:",
-                    remoteData.version
+            // Primera ejecución de esta instalación
+            if (!lastVersion) {
+
+                localStorage.setItem(
+                    "las7_version",
+                    remoteVersion
                 );
 
-                if (navigator.serviceWorker.controller) {
+                return;
+            }
 
-                    const messageChannel = new MessageChannel();
+            // Ya estamos en la versión conocida
+            if (lastVersion === remoteVersion) {
+                return;
+            }
 
-                    messageChannel.port1.onmessage = function (event) {
+            console.log(
+                "Nueva versión detectada:",
+                remoteVersion
+            );
 
-                        if (
-                            event.data &&
-                            event.data.type === "CACHE_CLEARED"
-                        ) {
+            // Guardamos la versión ANTES de recargar.
+            // Esto evita el bucle infinito.
+            localStorage.setItem(
+                "las7_version",
+                remoteVersion
+            );
 
-                            window.location.reload();
+            if (navigator.serviceWorker.controller) {
 
-                        }
+                const messageChannel = new MessageChannel();
 
-                    };
+                messageChannel.port1.onmessage = function (event) {
 
-                    navigator.serviceWorker.controller.postMessage(
-                        {
-                            type: "CLEAR_CACHE"
-                        },
-                        [messageChannel.port2]
-                    );
+                    if (
+                        event.data &&
+                        event.data.type === "CACHE_CLEARED"
+                    ) {
 
-                } else {
+                        window.location.reload();
 
-                    window.location.reload();
+                    }
 
-                }
+                };
+
+                navigator.serviceWorker.controller.postMessage(
+                    {
+                        type: "CLEAR_CACHE"
+                    },
+                    [messageChannel.port2]
+                );
+
+            } else {
+
+                window.location.reload();
 
             }
 
