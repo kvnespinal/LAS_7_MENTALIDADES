@@ -1,149 +1,75 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#07102d">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <title>Las 7 Mentalidades</title>
-
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.webmanifest">
-    <meta name="theme-color" content="#111111">
 </head>
-
 <body>
-
     <main id="app">
-
-        <section id="screen">
-
-            <!-- Aquí JavaScript colocará las diferentes pantallas -->
-
-        </section>
-
+        <section id="screen"></section>
     </main>
 
     <script src="app.js"></script>
 
-<script>
-    async function checkForUpdates() {
+    <script>
+        async function checkForUpdates() {
+            try {
+                const response = await fetch("./version.json", { cache: "no-store" });
+                if (!response.ok) return;
 
-        try {
+                const remoteData = await response.json();
+                const remoteVersion = remoteData.version;
+                const lastVersion = localStorage.getItem("las7_version");
 
-            const response = await fetch("./version.json", {
-                cache: "no-store"
-            });
+                if (!lastVersion) {
+                    localStorage.setItem("las7_version", remoteVersion);
+                    return;
+                }
 
-            if (!response.ok) return;
+                if (lastVersion === remoteVersion) return;
 
-            const remoteData = await response.json();
-            const remoteVersion = remoteData.version;
+                localStorage.setItem("las7_version", remoteVersion);
 
-            const lastVersion =
-                localStorage.getItem("las7_version");
+                if (navigator.serviceWorker.controller) {
+                    const channel = new MessageChannel();
 
-            // Primera ejecución de esta instalación
-            if (!lastVersion) {
+                    channel.port1.onmessage = function (event) {
+                        if (event.data && event.data.type === "CACHE_CLEARED") {
+                            window.location.reload();
+                        }
+                    };
 
-                localStorage.setItem(
-                    "las7_version",
-                    remoteVersion
-                );
-
-                return;
+                    navigator.serviceWorker.controller.postMessage(
+                        { type: "CLEAR_CACHE" },
+                        [channel.port2]
+                    );
+                } else {
+                    window.location.reload();
+                }
+            } catch (error) {
+                console.log("Sin comprobación de actualización; se mantiene la versión disponible.");
             }
-
-            // Ya estamos en la versión conocida
-            if (lastVersion === remoteVersion) {
-                return;
-            }
-
-            console.log(
-                "Nueva versión detectada:",
-                remoteVersion
-            );
-
-            // Guardamos la versión ANTES de recargar.
-            // Esto evita el bucle infinito.
-            localStorage.setItem(
-                "las7_version",
-                remoteVersion
-            );
-
-            if (navigator.serviceWorker.controller) {
-
-                const messageChannel = new MessageChannel();
-
-                messageChannel.port1.onmessage = function (event) {
-
-                    if (
-                        event.data &&
-                        event.data.type === "CACHE_CLEARED"
-                    ) {
-
-                        window.location.reload();
-
-                    }
-
-                };
-
-                navigator.serviceWorker.controller.postMessage(
-                    {
-                        type: "CLEAR_CACHE"
-                    },
-                    [messageChannel.port2]
-                );
-
-            } else {
-
-                window.location.reload();
-
-            }
-
-        } catch (error) {
-
-            console.log(
-                "No se pudo comprobar actualización. Se continúa con la versión disponible."
-            );
-
         }
 
-    }
-
-
-    if ("serviceWorker" in navigator) {
-
-        window.addEventListener("load", async function () {
-
-            try {
-
-                const registration =
-                    await navigator.serviceWorker.register(
-                        "./sw.js",
-                        {
-                            updateViaCache: "none"
-                        }
-                    );
-
-                await registration.update();
-
-                await checkForUpdates();
-
-            } catch (error) {
-
-                console.warn(
-                    "Service Worker no disponible:",
-                    error
-                );
-
-            }
-
-        });
-
-    }
-</script>
-
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", async function () {
+                try {
+                    const registration = await navigator.serviceWorker.register("./sw.js", {
+                        updateViaCache: "none"
+                    });
+                    await registration.update();
+                    await checkForUpdates();
+                } catch (error) {
+                    console.warn("Service Worker no disponible:", error);
+                }
+            });
+        }
+    </script>
 </body>
-
 </html>
