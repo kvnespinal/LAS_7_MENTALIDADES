@@ -7,7 +7,7 @@ const user = {
 };
 
 const challenges = [
-    { challenge: "ANTONIO ANARIBA MARICON", mindset: "OPTIMISMO" },
+    { challenge: "VENTAS BAJAS", mindset: "OPTIMISMO" },
     { challenge: "COMPETENCIA", mindset: "MENTALIDAD COMPETITIVA" },
     { challenge: "DUDA", mindset: "CONFIANZA" },
     { challenge: "RECHAZO", mindset: "PERSISTENCIA" },
