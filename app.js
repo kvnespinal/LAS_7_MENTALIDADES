@@ -7,7 +7,7 @@ const user = {
 };
 
 const challenges = [
-    { challenge: "VENTAS BAJAS", mindset: "OPTIMISMO" },
+    { challenge: "VENTAS BAJAS PRUEBA DE CAMBIO", mindset: "OPTIMISMO" },
     { challenge: "COMPETENCIA", mindset: "MENTALIDAD COMPETITIVA" },
     { challenge: "DUDA", mindset: "CONFIANZA" },
     { challenge: "RECHAZO", mindset: "PERSISTENCIA" },
