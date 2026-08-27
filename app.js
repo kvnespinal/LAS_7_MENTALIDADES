@@ -26,7 +26,8 @@ const mindsets = [
     "Sed de conocimiento y amor por enseñar"
 ];
 
-const EXPOSITOR_PHRASE = "Gracias por adquirir tu compromiso.";
+const EXPOSITOR_PHRASE = "LOS EQUIPOS REFLEJAN LO QUE SUS LIDERES MODELAN CADA DIA";
+const EXPOSITOR_NAME = "-TAREK SAKER";
 const screen = document.getElementById("screen");
 
 function brand() {
@@ -51,10 +52,11 @@ function showWelcomeScreen() {
     screen.innerHTML = `
         <div class="screen-content">
             ${brand()}
-            <div class="eyebrow">QUIERES ARQUIRIR LAS</div>
+            <div class="eyebrow">CONFERENCIA 2026</div>
             <img src="assets/05_GRAFISMO.svg" alt="Las 7 Mentalidades del Líder Retail" class="hero-grafismo">
             <p class="hero-copy">
-                Ideas prácticas para liderar, <br>conectar y crear experiencias que dejan huella.
+                Ideas prácticas para liderar, conectar y crear
+                experiencias que dejan huella.
             </p>
             <button class="cta" id="startButton">COMENZAR&nbsp; →</button>
             ${sponsors()}
@@ -118,7 +120,7 @@ function showChallengeScreen() {
     screen.innerHTML = `
         <div class="screen-content challenge-screen">
             ${brand()}
-            <div class="eyebrow">CUÉNTANOS</div>
+            <div class="eyebrow">TU DESAFÍO</div>
             <h2 class="screen-title">¿CUÁL ES TU MAYOR<br>DESAFÍO COMO LÍDER RETAIL?</h2>
 
             <div id="challengeGrid" class="challenge-grid"></div>
@@ -165,9 +167,9 @@ function showCommitmentScreen() {
             <div class="eyebrow">TU DESAFÍO PRINCIPAL</div>
             <div class="commitment-challenge">${user.challenge}</div>
             <p class="commitment-question">
-                ¿TE GUSTARÍA SABER QUE MENTALIDAD<br>NECESITAS REFORZAR?
+                ¿TE COMPROMETES A DESARROLLAR<br>LAS 7 MENTALIDADES?
             </p>
-            <button class="cta" id="commitmentButton">SÍ, ME GUSTARÍA&nbsp; →</button>
+            <button class="cta" id="commitmentButton">SÍ, ME COMPROMETO&nbsp; →</button>
             ${sponsors()}
         </div>
     `;
@@ -201,10 +203,10 @@ function showMindsetResult() {
     screen.innerHTML = `
         <div class="screen-content">
             ${brand()}
-            <div class="result-label">MENTALIDAD IDENTIFICADA A REFORZAR</div>
+            <div class="result-label">MENTALIDAD IDENTIFICADA</div>
             <h1 class="mindset-result">${user.mindset}</h1>
             <p class="result-description">
-                Esta es la mentalidad que puede ayudarte<br>a enfrentar tu principal desafío.
+                Esta es la mentalidad que puede ayudarte a enfrentar tu principal desafío.
             </p>
             <div class="result-actions">
                 <button class="cta" id="resultContinueButton">GENERAR TICKET&nbsp; →</button>
@@ -304,16 +306,16 @@ function formatTicket(ticket) {
     const WIDTH = 32;
     let output = "";
 
-    output += centerText("CRECE", WIDTH) + "\n";
-    output += centerText("LAS 7 MENTALIDADES", WIDTH) + "\n";
     output += line(WIDTH) + "\n";
-    output += centerText("TICKET DE ADQUISICION", WIDTH) + "\n\n";
 
     output += "CLIENTE:\n";
-    output += wrapText(ticket.client, WIDTH) + "\n\n";
+    output += wrapText(ticket.client, WIDTH) + "\n";
+
     output += "FECHA: " + ticket.date + "\n";
+
     output += "TRANSACCION:\n";
-    output += ticket.transactionId + "\n";
+    output += wrapText(ticket.transactionId, WIDTH) + "\n";
+
     output += line(WIDTH) + "\n";
 
     output += "RETO PRINCIPAL:\n";
@@ -321,32 +323,42 @@ function formatTicket(ticket) {
 
     output += "MENTALIDAD RECOMENDADA:\n";
     output += wrapText(ticket.mindset, WIDTH) + "\n";
+
     output += line(WIDTH) + "\n";
 
     output += centerText("LAS 7 MENTALIDADES", WIDTH) + "\n\n";
 
     ticket.mindsets.forEach(mindset => {
         const lines = wrapText(mindset, WIDTH - 4).split("\n");
+
         lines.forEach((text, index) => {
-            output += (index === 0 ? "[✓] " : "    ") + text + "\n";
+            output += (index === 0 ? "[X] " : "    ") + text + "\n";
         });
     });
 
     output += "\n" + line(WIDTH) + "\n";
-    output += "VALOR COMERCIAL:       L. 0.00\n";
-    output += "ADQUISICION:          COMPROMISO\n";
-    output += "DESCUENTO:           EXPERIENCIA\n";
-    output += "TOTAL:                 L. 0.00\n";
+
+    output += "VALOR COMERCIAL: L. 0.00\n";
+    output += "ADQUISICION: COMPROMISO\n";
+    output += "DESCUENTO: 100% APLICACION\n";
+    output += "TOTAL: L. 0.00\n";
+
     output += line(WIDTH) + "\n";
 
     output += centerText("ADQUISICION APROBADA", WIDTH) + "\n\n";
-    output += "VALOR COMERCIAL:\nINCALCULABLE\n\n";
-    output += "VALOR AL APLICARLAS:\nTRANSFORMADOR\n\n";
-    output += "ESTADO: [✓] COMPRA EXITOSA\n";
+
+    output += "VALOR COMERCIAL:\n";
+    output += "INCALCULABLE\n\n";
+
+    output += "VALOR AL APLICARLAS:\n";
+    output += "TRANSFORMADOR\n\n";
+
+    output += "ESTADO: [X] COMPRA EXITOSA\n";
+
     output += line(WIDTH) + "\n\n";
 
     output += centerText(EXPOSITOR_PHRASE, WIDTH) + "\n";
-    output += centerText("- EXPOSITOR -", WIDTH) + "\n\n\n";
+    output += centerText(EXPOSITOR_NAME, WIDTH) + "\n\n\n";
 
     return output;
 }
