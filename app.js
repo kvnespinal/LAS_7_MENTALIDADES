@@ -334,8 +334,8 @@ function formatTicket(ticket) {
 
     output += "\n" + line(WIDTH) + "\n";
     output += "VALOR COMERCIAL:       L. 0.00\n";
-    output += "ADQUISICION:           COMPROMISO\n";
-    output += "DESCUENTO:             EXPERIENCIA\n";
+    output += "ADQUISICION:          COMPROMISO\n";
+    output += "DESCUENTO:           EXPERIENCIA\n";
     output += "TOTAL:                 L. 0.00\n";
     output += line(WIDTH) + "\n";
 
