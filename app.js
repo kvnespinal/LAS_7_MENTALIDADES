@@ -51,7 +51,7 @@ function showWelcomeScreen() {
     screen.innerHTML = `
         <div class="screen-content">
             ${brand()}
-            <div class="eyebrow">CONFERENCIA 2026</div>
+            <div class="eyebrow">QUIERES ARQUIRIR LAS</div>
             <img src="assets/05_GRAFISMO.svg" alt="Las 7 Mentalidades del Líder Retail" class="hero-grafismo">
             <p class="hero-copy">
                 Ideas prácticas para liderar, conectar y crear
@@ -119,7 +119,7 @@ function showChallengeScreen() {
     screen.innerHTML = `
         <div class="screen-content challenge-screen">
             ${brand()}
-            <div class="eyebrow">TU DESAFÍO</div>
+            <div class="eyebrow">CUÉNTANOS</div>
             <h2 class="screen-title">¿CUÁL ES TU MAYOR<br>DESAFÍO COMO LÍDER RETAIL?</h2>
 
             <div id="challengeGrid" class="challenge-grid"></div>
@@ -166,7 +166,7 @@ function showCommitmentScreen() {
             <div class="eyebrow">TU DESAFÍO PRINCIPAL</div>
             <div class="commitment-challenge">${user.challenge}</div>
             <p class="commitment-question">
-                ¿TE COMPROMETES A DESARROLLAR<br>LAS 7 MENTALIDADES?
+                ¿TE GUSTARÍA SABER QUE MENTALIDAD<br>NECESITAS REFORZAR?
             </p>
             <button class="cta" id="commitmentButton">SÍ, ME COMPROMETO&nbsp; →</button>
             ${sponsors()}
@@ -202,7 +202,7 @@ function showMindsetResult() {
     screen.innerHTML = `
         <div class="screen-content">
             ${brand()}
-            <div class="result-label">MENTALIDAD IDENTIFICADA</div>
+            <div class="result-label">MENTALIDAD IDENTIFICADA A REFORZAR</div>
             <h1 class="mindset-result">${user.mindset}</h1>
             <p class="result-description">
                 Esta es la mentalidad que puede ayudarte a enfrentar tu principal desafío.
