@@ -1079,3 +1079,60 @@ input {
     min-height: 1920px !important;
     overflow: hidden !important;
 }
+
+
+/* =========================================================
+   v1.1.8 — FINAL BRANDING / LOADING SCALE
+   Fine tuning after MUPI visual test.
+   ========================================================= */
+
+/* Bottom sponsors: slightly smaller than v1.1.7 */
+.bottom-sponsors {
+    bottom: 46px !important;
+    gap: 48px !important;
+}
+
+.sponsor-logo {
+    height: 92px !important;
+    max-width: 300px !important;
+}
+
+.sponsor-multiplaza,
+.sponsor-metromall {
+    max-width: 320px !important;
+}
+
+.sponsor-roble {
+    max-width: 210px !important;
+}
+
+/* Loading / processing animation: significantly larger */
+.processing-orb {
+    width: 520px !important;
+    margin-bottom: 54px !important;
+}
+
+.processing-orb::before {
+    inset: 12% !important;
+    border-width: 7px !important;
+}
+
+.processing-orb::after {
+    width: 22% !important;
+}
+
+/* Keep loading labels proportional to the larger animation */
+.processing-label {
+    font-size: 27px !important;
+}
+
+.processing-message {
+    font-size: 44px !important;
+    max-width: 940px !important;
+}
+
+/* Success graphic gets a small proportional bump */
+.success-icon {
+    width: 300px !important;
+    font-size: 116px !important;
+}
