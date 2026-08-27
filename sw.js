@@ -1,4 +1,4 @@
-const CACHE_NAME = "las7-shell-v1.1.5";
+const CACHE_NAME = "las7-shell-v1.1.7";
 
 const APP_FILES = [
     "./",
@@ -21,20 +21,18 @@ self.addEventListener("install", event => {
     event.waitUntil((async () => {
         const cache = await caches.open(CACHE_NAME);
 
-        /*
-         * Cache every file independently so one missing asset cannot
-         * abort installation of the whole offline shell.
-         */
-        for (const file of APP_FILES) {
+        // Cache every asset independently. One bad/missing file must not
+        // prevent the offline shell from being installed.
+        await Promise.all(APP_FILES.map(async file => {
             try {
-                const response = await fetch(file, { cache: "no-store" });
+                const response = await fetch(new Request(file, { cache: "reload" }));
                 if (response.ok) {
                     await cache.put(file, response.clone());
                 }
             } catch (error) {
                 console.warn("Precache skipped:", file);
             }
-        }
+        }));
 
         await self.skipWaiting();
     })());
@@ -65,25 +63,19 @@ self.addEventListener("fetch", event => {
 
     if (request.method !== "GET") return;
 
-    /*
-     * Navigation: cache-first.
-     * This is what allows the MUPI to start with Wi-Fi completely OFF.
-     */
+    // The app shell must start from cache whenever it has already been
+    // installed. This is what makes a cold launch possible with Wi-Fi OFF.
     if (request.mode === "navigate") {
         event.respondWith((async () => {
-            const cached = await caches.match("./index.html");
+            const cache = await caches.open(CACHE_NAME);
+            const cached = await cache.match("./index.html");
 
             if (cached) {
-                /*
-                 * Refresh the cached HTML in the background when online.
-                 * The response shown to the user always comes from cache.
-                 */
+                // Refresh in the background when a network is available.
                 fetch(request, { cache: "no-store" })
                     .then(response => {
                         if (response && response.ok) {
-                            return caches.open(CACHE_NAME).then(cache =>
-                                cache.put("./index.html", response.clone())
-                            );
+                            return cache.put("./index.html", response.clone());
                         }
                     })
                     .catch(() => {});
@@ -91,34 +83,37 @@ self.addEventListener("fetch", event => {
                 return cached;
             }
 
-            /*
-             * First ever load: network is allowed because there is no cache yet.
-             */
-            return fetch(request);
+            // First ever launch: network is necessary to seed the shell.
+            try {
+                const response = await fetch(request);
+                if (response && response.ok) {
+                    await cache.put("./index.html", response.clone());
+                }
+                return response;
+            } catch (error) {
+                // If even the first load is offline, return whatever shell
+                // can be found in any cache.
+                return caches.match("./index.html");
+            }
         })());
 
         return;
     }
 
-    /*
-     * All application resources: cache-first.
-     * If a resource is not cached, use the network and cache it when possible.
-     */
     event.respondWith((async () => {
-        const cached = await caches.match(request);
+        const cache = await caches.open(CACHE_NAME);
+        const cached = await cache.match(request);
 
         if (cached) {
-            if (navigator.onLine) {
-                fetch(request)
-                    .then(response => {
-                        if (response && response.ok) {
-                            caches.open(CACHE_NAME).then(cache =>
-                                cache.put(request, response.clone())
-                            );
-                        }
-                    })
-                    .catch(() => {});
-            }
+            // Stale-while-refresh for resources: the UI gets the cached
+            // resource immediately, while the latest copy is fetched online.
+            fetch(request, { cache: "no-store" })
+                .then(response => {
+                    if (response && response.ok) {
+                        cache.put(request, response.clone()).catch(() => {});
+                    }
+                })
+                .catch(() => {});
 
             return cached;
         }
@@ -128,16 +123,19 @@ self.addEventListener("fetch", event => {
 
             if (response && response.ok) {
                 const url = new URL(request.url);
-
                 if (url.origin === self.location.origin) {
-                    const cache = await caches.open(CACHE_NAME);
                     await cache.put(request, response.clone());
                 }
             }
 
             return response;
         } catch (error) {
-            return caches.match("./index.html");
+            // For missing subresources, fail gracefully. The cached HTML
+            // remains available for the next navigation.
+            return new Response("", {
+                status: 504,
+                statusText: "Offline"
+            });
         }
     })());
 });

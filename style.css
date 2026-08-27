@@ -913,3 +913,169 @@ input {
 .error-message {
     font-size: 20px !important;
 }
+
+
+/* =========================================================
+   v1.1.7 — FINAL 1080 × 1920 VISUAL SCALE
+   All coordinates are authored against a fixed 1080×1920 canvas.
+   The canvas is uniformly scaled by index.html for any display.
+   ========================================================= */
+
+#screen {
+    width: 1080px !important;
+    height: 1920px !important;
+    min-height: 1920px !important;
+}
+
+/* Branding: intentionally larger than v1.1.5/1.1.6 */
+.brand-lockup {
+    top: 42px !important;
+    width: 520px !important;
+    max-width: 520px !important;
+}
+
+.brand-logo {
+    width: 100% !important;
+    max-width: 520px !important;
+    max-height: 155px !important;
+}
+
+/* Main event graphic */
+.hero-grafismo {
+    width: 780px !important;
+    max-width: 780px !important;
+    max-height: 390px !important;
+}
+
+/* Supporting copy */
+.hero-copy {
+    max-width: 860px !important;
+    font-size: 29px !important;
+    line-height: 1.32 !important;
+}
+
+/* Bottom logos */
+.bottom-sponsors {
+    bottom: 42px !important;
+    width: 960px !important;
+    min-height: 120px !important;
+    gap: 54px !important;
+}
+
+.sponsor-logo {
+    height: 112px !important;
+    max-width: 330px !important;
+}
+
+.sponsor-multiplaza,
+.sponsor-metromall {
+    max-width: 350px !important;
+}
+
+.sponsor-roble {
+    max-width: 235px !important;
+}
+
+/* General interaction elements */
+.cta {
+    width: 460px !important;
+    min-height: 82px !important;
+    font-size: 29px !important;
+}
+
+.panel {
+    width: 800px !important;
+    padding: 58px !important;
+}
+
+.screen-title {
+    font-size: 62px !important;
+}
+
+.screen-copy {
+    font-size: 26px !important;
+}
+
+input {
+    min-height: 82px !important;
+    font-size: 27px !important;
+}
+
+/* Challenges */
+.challenge-grid {
+    width: 850px !important;
+    gap: 18px !important;
+}
+
+.challenge-button {
+    min-height: 118px !important;
+    font-size: 24px !important;
+}
+
+/* Commitment */
+.commitment-challenge {
+    font-size: 68px !important;
+}
+
+.commitment-question {
+    font-size: 28px !important;
+}
+
+/* Processing/loading */
+.processing-orb {
+    width: 360px !important;
+    margin-bottom: 46px !important;
+}
+
+.processing-orb::before {
+    border-width: 5px !important;
+}
+
+.processing-label,
+.result-label {
+    font-size: 25px !important;
+}
+
+.processing-message {
+    max-width: 920px !important;
+    font-size: 42px !important;
+}
+
+/* Result */
+.mindset-result {
+    max-width: 940px !important;
+    font-size: 84px !important;
+}
+
+.result-description {
+    max-width: 860px !important;
+    font-size: 27px !important;
+}
+
+.result-actions .cta {
+    margin-top: 42px !important;
+}
+
+/* Success */
+.success-icon {
+    width: 280px !important;
+    font-size: 110px !important;
+    margin-bottom: 46px !important;
+}
+
+.success-message {
+    font-size: 28px !important;
+}
+
+.reset-message {
+    font-size: 19px !important;
+}
+
+/* Keep every screen inside the fixed canvas. */
+.screen-content,
+.ticket-screen {
+    width: 1080px !important;
+    height: 1920px !important;
+    min-height: 1920px !important;
+    overflow: hidden !important;
+}
