@@ -87,22 +87,27 @@ button {
 
 .brand-lockup {
     position: absolute;
-    top: max(18px, env(safe-area-inset-top));
+    top: max(24px, env(safe-area-inset-top));
     left: 50%;
     transform: translateX(-50%);
-    width: min(42vw, 150px);
-    height: auto;
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 9px;
+    font-size: clamp(12px, 3vw, 18px);
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    white-space: nowrap;
 }
 
-.brand-logo {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-height: 54px;
-    object-fit: contain;
+.brand-mark {
+    width: 24px;
+    height: 24px;
+    border: 1px solid rgba(255,255,255,0.85);
+    border-radius: 7px;
+    display: grid;
+    place-items: center;
+    font-size: 14px;
+    line-height: 1;
 }
 
 .eyebrow {
@@ -127,18 +132,7 @@ button {
     color: var(--blue-soft);
 }
 
-.hero-grafismo {
-    display: block;
-    width: min(82vw, 430px);
-    height: auto;
-    max-height: 24vh;
-    object-fit: contain;
-    margin-top: 2px;
-    filter: drop-shadow(0 0 18px rgba(255,255,255,0.08));
-}
-
 .hero-subtitle {
-    display: none;
     margin-top: 14px;
     max-width: 90%;
     font-size: clamp(16px, 4vw, 28px);
@@ -149,7 +143,7 @@ button {
 
 .hero-copy {
     max-width: 82%;
-    margin-top: 16px;
+    margin-top: 18px;
     color: var(--muted);
     font-size: clamp(12px, 3vw, 17px);
     line-height: 1.45;
@@ -183,36 +177,25 @@ button {
 .bottom-sponsors {
     position: absolute;
     left: 50%;
-    bottom: max(14px, env(safe-area-inset-bottom));
+    bottom: max(18px, env(safe-area-inset-bottom));
     transform: translateX(-50%);
-    width: 90%;
-    min-height: 48px;
+    width: 88%;
     display: flex;
-    align-items: center;
     justify-content: center;
-    gap: clamp(12px, 4vw, 28px);
+    gap: 10px;
+    flex-wrap: wrap;
+    color: rgba(255,255,255,0.68);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.11em;
 }
 
-.sponsor-logo {
-    display: block;
-    width: auto;
-    height: clamp(28px, 6.5vw, 46px);
-    max-width: 28vw;
-    object-fit: contain;
+.sponsor-placeholder {
+    padding: 6px 9px;
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 999px;
+    background: rgba(0,0,0,0.12);
 }
-
-.sponsor-multiplaza {
-    max-width: 29vw;
-}
-
-.sponsor-metromall {
-    max-width: 29vw;
-}
-
-.sponsor-roble {
-    max-width: 24vw;
-}
-
 
 .panel {
     width: min(92vw, 560px);
@@ -469,8 +452,6 @@ input:focus {
 
 .ticket {
     width: min(90vw, 420px);
-    overflow-wrap: anywhere;
-
     max-height: 82dvh;
     padding: 18px;
     border-radius: 4px;

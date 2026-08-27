@@ -2,14 +2,14 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#07102d">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <title>Las 7 Mentalidades</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="ui-1080x1920.css">
     <link rel="manifest" href="manifest.webmanifest">
-    <meta name="theme-color" content="#07102d">
 </head>
-
 <body>
     <main id="app">
         <section id="screen"></section>
@@ -18,98 +18,58 @@
     <script src="app.js"></script>
 
     <script>
-    /*
-     * LAS 7 MENTALIDADES — v1.1.5
-     * 1080x1920 design canvas + robust offline PWA behavior.
-     */
-    (function () {
-        const DESIGN_W = 1080;
-        const DESIGN_H = 1920;
-        const screen = document.getElementById("screen");
-
-        function updateDesignScale() {
-            if (!screen) return;
-
-            const scale = Math.min(
-                window.innerWidth / DESIGN_W,
-                window.innerHeight / DESIGN_H
-            );
-
-            screen.style.setProperty("--ui-scale", String(scale));
-        }
-
-        updateDesignScale();
-        window.addEventListener("resize", updateDesignScale);
-        window.addEventListener("orientationchange", updateDesignScale);
-
-        if (!("serviceWorker" in navigator)) return;
-
-        window.addEventListener("load", async function () {
+        async function checkForUpdates() {
             try {
-                const registration = await navigator.serviceWorker.register(
-                    "./sw.js",
-                    { updateViaCache: "none" }
-                );
+                const response = await fetch("./version.json", { cache: "no-store" });
+                if (!response.ok) return;
 
-                /*
-                 * Important:
-                 * Do NOT make the page depend on version.json to start.
-                 * The Service Worker serves the cached app first when offline.
-                 */
-                if (navigator.onLine) {
-                    try {
-                        await registration.update();
-                    } catch (e) {
-                        console.log("Actualización no disponible; se mantiene la versión local.");
-                    }
+                const remoteData = await response.json();
+                const remoteVersion = remoteData.version;
+                const lastVersion = localStorage.getItem("las7_version");
+
+                if (!lastVersion) {
+                    localStorage.setItem("las7_version", remoteVersion);
+                    return;
                 }
 
-                /*
-                 * Controlled update:
-                 * Only check the remote version when online.
-                 * Never block startup and never clear the cache blindly.
-                 */
-                if (navigator.onLine) {
-                    try {
-                        const response = await fetch("./version.json", {
-                            cache: "no-store"
-                        });
+                if (lastVersion === remoteVersion) return;
 
-                        if (response.ok) {
-                            const remote = await response.json();
-                            const remoteVersion = remote.version;
-                            const localVersion = localStorage.getItem("las7_version");
+                localStorage.setItem("las7_version", remoteVersion);
 
-                            if (!localVersion) {
-                                localStorage.setItem("las7_version", remoteVersion);
-                            } else if (localVersion !== remoteVersion) {
-                                localStorage.setItem("las7_version", remoteVersion);
+                if (navigator.serviceWorker.controller) {
+                    const channel = new MessageChannel();
 
-                                if (registration.waiting) {
-                                    registration.waiting.postMessage({ type: "SKIP_WAITING" });
-                                }
-                            }
+                    channel.port1.onmessage = function (event) {
+                        if (event.data && event.data.type === "CACHE_CLEARED") {
+                            window.location.reload();
                         }
-                    } catch (e) {
-                        console.log("Sin conexión para comprobar versión; se continúa normalmente.");
-                    }
+                    };
+
+                    navigator.serviceWorker.controller.postMessage(
+                        { type: "CLEAR_CACHE" },
+                        [channel.port2]
+                    );
+                } else {
+                    window.location.reload();
                 }
             } catch (error) {
-                console.warn("Service Worker no disponible:", error);
+                console.log("Sin comprobación de actualización; se mantiene la versión disponible.");
             }
-        });
+        }
 
-        navigator.serviceWorker?.addEventListener("controllerchange", function () {
-            /*
-             * Reload only after a new Service Worker has taken control.
-             * This prevents the old infinite reload/cache-clear behavior.
-             */
-            if (!window.__las7_sw_reloaded) {
-                window.__las7_sw_reloaded = true;
-                window.location.reload();
-            }
-        });
-    })();
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", async function () {
+                try {
+                    const registration = await navigator.serviceWorker.register("./sw.js", {
+                        updateViaCache: "none"
+                    });
+                    await registration.update();
+                    await checkForUpdates();
+                } catch (error) {
+                    console.warn("Service Worker no disponible:", error);
+                }
+            });
+        }
     </script>
 </body>
 </html>

@@ -32,17 +32,18 @@ const screen = document.getElementById("screen");
 function brand() {
     return `
         <div class="brand-lockup">
-            <img src="assets/01_CRECE.svg" alt="CRECE" class="brand-logo">
+            <span class="brand-mark">7</span>
+            <span>CRECE</span>
         </div>
     `;
 }
 
 function sponsors() {
     return `
-        <div class="bottom-sponsors" aria-label="Patrocinadores">
-            <img src="assets/02_MULTIPLAZA.svg" alt="Multiplaza" class="sponsor-logo sponsor-multiplaza">
-            <img src="assets/03_METROMALL.svg" alt="Metromall" class="sponsor-logo sponsor-metromall">
-            <img src="assets/04_GRUPO_ROBLE.svg" alt="Grupo Roble" class="sponsor-logo sponsor-roble">
+        <div class="bottom-sponsors">
+            <span class="sponsor-placeholder">ROBLE</span>
+            <span class="sponsor-placeholder">MULTIPLAZA</span>
+            <span class="sponsor-placeholder">METROMALL</span>
         </div>
     `;
 }
@@ -52,7 +53,8 @@ function showWelcomeScreen() {
         <div class="screen-content">
             ${brand()}
             <div class="eyebrow">CONFERENCIA 2026</div>
-            <img src="assets/05_GRAFISMO.svg" alt="Las 7 Mentalidades del Líder Retail" class="hero-grafismo">
+            <h1 class="hero-title">LAS <span class="seven">7</span><br>MENTALIDADES</h1>
+            <div class="hero-subtitle">DEL LÍDER RETAIL</div>
             <p class="hero-copy">
                 Ideas prácticas para liderar, conectar y crear
                 experiencias que dejan huella.
@@ -186,7 +188,6 @@ function showProcessingScreen() {
             <div class="processing-orb"></div>
             <div class="processing-label">PROCESANDO</div>
             <div id="processingMessage" class="processing-message">ANALIZANDO TU RESPUESTA...</div>
-            ${sponsors()}
         </div>
     `;
 
@@ -281,7 +282,6 @@ function showSuccessScreen() {
             <div class="result-label">ADQUISICIÓN COMPLETADA</div>
             <p class="success-message">Tu ticket ha sido impreso.</p>
             <p class="reset-message">Preparando la siguiente experiencia...</p>
-            ${sponsors()}
         </div>
     `;
 
@@ -353,29 +353,16 @@ function formatTicket(ticket) {
 }
 
 function wrapText(text, maxLength) {
-    const words = String(text).trim().split(/\s+/);
+    const words = String(text).split(" ");
     const lines = [];
     let current = "";
 
     words.forEach(word => {
-        // Break very long words so nothing is silently truncated.
-        while (word.length > maxLength) {
-            if (current.trim()) {
-                lines.push(current.trim());
-                current = "";
-            }
-            lines.push(word.slice(0, maxLength));
-            word = word.slice(maxLength);
-        }
-
-        if (!word) return;
-
-        const candidate = current ? `${current} ${word}` : word;
-        if (candidate.length > maxLength) {
+        if ((current + word).length > maxLength) {
             if (current.trim()) lines.push(current.trim());
-            current = word;
+            current = word + " ";
         } else {
-            current = candidate;
+            current += word + " ";
         }
     });
 
@@ -384,14 +371,9 @@ function wrapText(text, maxLength) {
 }
 
 function centerText(text, width) {
-    const wrapped = wrapText(text, width);
-    return wrapped
-        .split("\n")
-        .map(line => {
-            const spaces = Math.max(0, width - line.length);
-            return " ".repeat(Math.floor(spaces / 2)) + line;
-        })
-        .join("\n");
+    if (text.length >= width) return text.substring(0, width);
+    const spaces = width - text.length;
+    return " ".repeat(Math.floor(spaces / 2)) + text;
 }
 
 function line(width) {
