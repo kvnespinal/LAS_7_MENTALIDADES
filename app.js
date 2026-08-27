@@ -304,7 +304,7 @@ function formatTicket(ticket) {
     const WIDTH = 32;
     let output = "";
 
-    output += centerText("CRECE TU PUTA MADREEEEEEE", WIDTH) + "\n";
+    output += centerText("CRECE", WIDTH) + "\n";
     output += centerText("LAS 7 MENTALIDADES", WIDTH) + "\n";
     output += line(WIDTH) + "\n";
     output += centerText("TICKET DE ADQUISICION", WIDTH) + "\n\n";
