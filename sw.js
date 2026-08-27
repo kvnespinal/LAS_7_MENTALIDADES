@@ -9,7 +9,12 @@ const APP_FILES = [
     "./version.json",
     "./assets/background.png",
     "./assets/icon-192.png",
-    "./assets/icon-512.png"
+    "./assets/icon-512.png",
+    "./assets/01_CRECE.svg",
+    "./assets/02_MULTIPLAZA.svg",
+    "./assets/03_METROMALL.svg",
+    "./assets/04_GRUPO_ROBLE.svg",
+    "./assets/05_GRAFISMO.svg"
 ];
 
 self.addEventListener("install", event => {
