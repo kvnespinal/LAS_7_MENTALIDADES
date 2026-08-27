@@ -204,7 +204,7 @@ function showMindsetResult() {
             <div class="result-label">MENTALIDAD IDENTIFICADA A REFORZAR</div>
             <h1 class="mindset-result">${user.mindset}</h1>
             <p class="result-description">
-                Esta es la mentalidad que puede ayudarte a enfrentar tu principal desafío.
+                Esta es la mentalidad que puede ayudarte<br>a enfrentar tu principal desafío.
             </p>
             <div class="result-actions">
                 <button class="cta" id="resultContinueButton">GENERAR TICKET&nbsp; →</button>
