@@ -26,8 +26,7 @@ const mindsets = [
     "Sed de conocimiento y amor por enseñar"
 ];
 
-const EXPOSITOR_PHRASE = "LOS EQUIPOS REFLEJAN LO QUE SUS LIDERES MODELAN CADA DIA";
-const EXPOSITOR_NAME = "-TAREK SAKER";
+const EXPOSITOR_PHRASE = "LOS EQUIPOS REFLEJAN LO QUE SUS LÍDERES MODELAN CADA DÍA";
 const screen = document.getElementById("screen");
 
 function brand() {
@@ -306,6 +305,10 @@ function formatTicket(ticket) {
     const WIDTH = 32;
     let output = "";
 
+    // ----------------------------------------------------------
+    // DATOS
+    // ----------------------------------------------------------
+
     output += line(WIDTH) + "\n";
 
     output += "CLIENTE:\n";
@@ -318,6 +321,10 @@ function formatTicket(ticket) {
 
     output += line(WIDTH) + "\n";
 
+    // ----------------------------------------------------------
+    // RETO / MENTALIDAD
+    // ----------------------------------------------------------
+
     output += "RETO PRINCIPAL:\n";
     output += wrapText(ticket.challenge, WIDTH) + "\n\n";
 
@@ -326,17 +333,27 @@ function formatTicket(ticket) {
 
     output += line(WIDTH) + "\n";
 
+    // ----------------------------------------------------------
+    // LAS 7 MENTALIDADES
+    // ----------------------------------------------------------
+
     output += centerText("LAS 7 MENTALIDADES", WIDTH) + "\n\n";
 
     ticket.mindsets.forEach(mindset => {
         const lines = wrapText(mindset, WIDTH - 4).split("\n");
 
         lines.forEach((text, index) => {
+            // ASCII [X] para compatibilidad con la MHT-P11 / CP437.
             output += (index === 0 ? "[X] " : "    ") + text + "\n";
         });
     });
 
-    output += "\n" + line(WIDTH) + "\n";
+    // ----------------------------------------------------------
+    // VALOR / ADQUISICION
+    // ----------------------------------------------------------
+
+    output += "\n";
+    output += line(WIDTH) + "\n";
 
     output += "VALOR COMERCIAL: L. 0.00\n";
     output += "ADQUISICION: COMPROMISO\n";
@@ -344,6 +361,10 @@ function formatTicket(ticket) {
     output += "TOTAL: L. 0.00\n";
 
     output += line(WIDTH) + "\n";
+
+    // ----------------------------------------------------------
+    // CIERRE
+    // ----------------------------------------------------------
 
     output += centerText("ADQUISICION APROBADA", WIDTH) + "\n\n";
 
@@ -357,8 +378,14 @@ function formatTicket(ticket) {
 
     output += line(WIDTH) + "\n\n";
 
+    // ----------------------------------------------------------
+    // FRASE DEL EXPOSITOR
+    // ----------------------------------------------------------
+
     output += centerText(EXPOSITOR_PHRASE, WIDTH) + "\n";
-    output += centerText(EXPOSITOR_NAME, WIDTH) + "\n\n\n";
+    output += "-TAREK SAKER\n";
+
+    output += "\n\n\n";
 
     return output;
 }
