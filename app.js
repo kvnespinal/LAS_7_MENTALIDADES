@@ -54,7 +54,7 @@ function showWelcomeScreen() {
             <div class="eyebrow">QUIERES ARQUIRIR LAS</div>
             <img src="assets/05_GRAFISMO.svg" alt="Las 7 Mentalidades del Líder Retail" class="hero-grafismo">
             <p class="hero-copy">
-                Ideas prácticas para liderar,<br>conectar y crear experiencias que dejan huella.
+                Ideas prácticas para liderar, <br>conectar y crear experiencias que dejan huella.
             </p>
             <button class="cta" id="startButton">COMENZAR&nbsp; →</button>
             ${sponsors()}
@@ -167,7 +167,7 @@ function showCommitmentScreen() {
             <p class="commitment-question">
                 ¿TE GUSTARÍA SABER QUE MENTALIDAD<br>NECESITAS REFORZAR?
             </p>
-            <button class="cta" id="commitmentButton">SÍ, ME COMPROMETO&nbsp; →</button>
+            <button class="cta" id="commitmentButton">SÍ, ME GUSTARÍA&nbsp; →</button>
             ${sponsors()}
         </div>
     `;
