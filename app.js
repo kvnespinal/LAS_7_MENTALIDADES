@@ -7,13 +7,13 @@ const user = {
 };
 
 const challenges = [
-    { challenge: "VENTAS BAJAS", mindset: "OPTIMISMO" },
-    { challenge: "COMPETENCIA", mindset: "MENTALIDAD COMPETITIVA" },
-    { challenge: "DUDA", mindset: "CONFIANZA" },
-    { challenge: "RECHAZO", mindset: "PERSISTENCIA" },
-    { challenge: "CAMBIO", mindset: "FLEXIBILIDAD Y ADAPTABILIDAD" },
-    { challenge: "DESORDEN", mindset: "SISTEMATIZACIÓN Y EFICIENCIA" },
-    { challenge: "ESTANCAMIENTO", mindset: "SED DE CONOCIMIENTO Y AMOR POR ENSEÑAR" }
+    { challenge: "Ventas Bajas", mindset: "Optimismo" },
+    { challenge: "Competencia", mindset: "Mentalidad Competitiva" },
+    { challenge: "Duda", mindset: "Confianza" },
+    { challenge: "Rechazo", mindset: "Persistencia" },
+    { challenge: "Cambio", mindset: "Flexibilidad y Adaptabilidad" },
+    { challenge: "Desorden", mindset: "Sistematización y Eficiencia" },
+    { challenge: "Estancamiento", mindset: "Sed de conocimiento y amor por enseñar" }
 ];
 
 const mindsets = [
@@ -26,23 +26,13 @@ const mindsets = [
     "Sed de conocimiento y amor por enseñar"
 ];
 
-const EXPOSITOR_PHRASE = "LOS EQUIPOS REFLEJAN LO QUE SUS LÍDERES MODELAN CADA DÍA";
+const EXPOSITOR_PHRASE = "Los equipos reflejan lo que sus líderes modelan cada día";
 const screen = document.getElementById("screen");
 
 function brand() {
     return `
         <div class="brand-lockup">
             <img src="assets/01_CRECE.svg" alt="CRECE" class="brand-logo">
-        </div>
-    `;
-}
-
-function sponsors() {
-    return `
-        <div class="bottom-sponsors" aria-label="Patrocinadores">
-            <img src="assets/02_MULTIPLAZA.svg" alt="Multiplaza" class="sponsor-logo sponsor-multiplaza">
-            <img src="assets/03_METROMALL.svg" alt="Metromall" class="sponsor-logo sponsor-metromall">
-            <img src="assets/04_GRUPO_ROBLE.svg" alt="Grupo Roble" class="sponsor-logo sponsor-roble">
         </div>
     `;
 }
@@ -310,12 +300,12 @@ function formatTicket(ticket) {
 
     output += line(WIDTH) + "\n";
 
-    output += "CLIENTE:\n";
+    output += "Cliente:\n";
     output += wrapText(ticket.client, WIDTH) + "\n";
 
-    output += "FECHA: " + ticket.date + "\n";
+    output += "Fecha: " + ticket.date + "\n";
 
-    output += "TRANSACCION:\n";
+    output += "Transacción:\n";
     output += wrapText(ticket.transactionId, WIDTH) + "\n";
 
     output += line(WIDTH) + "\n";
@@ -324,10 +314,10 @@ function formatTicket(ticket) {
     // RETO / MENTALIDAD
     // ----------------------------------------------------------
 
-    output += "RETO PRINCIPAL:\n";
+    output += "Reto Principal:\n";
     output += wrapText(ticket.challenge, WIDTH) + "\n\n";
 
-    output += "MENTALIDAD RECOMENDADA:\n";
+    output += "Mentalidad recomendada a reforzar:\n";
     output += wrapText(ticket.mindset, WIDTH) + "\n";
 
     output += line(WIDTH) + "\n";
@@ -354,10 +344,10 @@ function formatTicket(ticket) {
     output += "\n";
     output += line(WIDTH) + "\n";
 
-    output += "VALOR COMERCIAL: L. 0.00\n";
-    output += "ADQUISICION: COMPROMISO\n";
-    output += "DESCUENTO: 100% APLICACION\n";
-    output += "TOTAL: L. 0.00\n";
+    output += "Valor Comercial: L. 0.00\n";
+    output += "Adquisición: Compromiso\n";
+    output += "Descuento: 100% Aplicación\n";
+    output += "Total: L. 0.00\n";
 
     output += line(WIDTH) + "\n";
 
@@ -365,15 +355,15 @@ function formatTicket(ticket) {
     // CIERRE
     // ----------------------------------------------------------
 
-    output += centerText("ADQUISICION APROBADA", WIDTH) + "\n\n";
+    output += centerText("Adquisición Aprobada", WIDTH) + "\n\n";
 
-    output += "VALOR COMERCIAL:\n";
-    output += "INCALCULABLE\n\n";
+    output += "Valor Comercial:\n";
+    output += "Incalculable\n\n";
 
-    output += "VALOR AL APLICARLAS:\n";
-    output += "TRANSFORMADOR\n\n";
+    output += "Valor al aplicarlas:\n";
+    output += "Transformador\n\n";
 
-    output += "ESTADO: [X] COMPRA EXITOSA\n";
+    output += "Estado: [X] Compra Exitosa\n";
 
     output += line(WIDTH) + "\n\n";
 
@@ -382,7 +372,7 @@ function formatTicket(ticket) {
     // ----------------------------------------------------------
 
     output += centerText(EXPOSITOR_PHRASE, WIDTH) + "\n";
-    output += "-TAREK SAKER\n";
+    output += "-Tarek Saker\n";
 
     output += "\n\n\n";
 
