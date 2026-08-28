@@ -37,11 +37,21 @@ function brand() {
     `;
 }
 
+function sponsors() {
+    return `
+        <div class="bottom-sponsors" aria-label="Patrocinadores">
+            <img src="assets/02_MULTIPLAZA.svg" alt="Multiplaza" class="sponsor-logo sponsor-multiplaza">
+            <img src="assets/03_METROMALL.svg" alt="Metromall" class="sponsor-logo sponsor-metromall">
+            <img src="assets/04_GRUPO_ROBLE.svg" alt="Grupo Roble" class="sponsor-logo sponsor-roble">
+        </div>
+    `;
+}
+
 function showWelcomeScreen() {
     screen.innerHTML = `
         <div class="screen-content">
             ${brand()}
-            <div class="eyebrow">QUIERES ADQUIRIR</div>
+            <div class="eyebrow">¿QUIERES ADQUIRIR?</div>
             <img src="assets/05_GRAFISMO.svg" alt="Las 7 Mentalidades del Líder Retail" class="hero-grafismo">
             <p class="hero-copy">
             </p>
