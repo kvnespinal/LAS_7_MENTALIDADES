@@ -326,7 +326,7 @@ function formatTicket(ticket) {
     output += "Reto Principal:\n";
     output += wrapText(ticket.challenge, WIDTH) + "\n\n";
 
-    output += "Mentalidad recomendada<br>a reforzar:\n";
+    output += "Mentalidad recomendada          a reforzar:\n";
     output += wrapText(ticket.mindset, WIDTH) + "\n";
 
     output += line(WIDTH) + "\n";
