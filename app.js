@@ -44,7 +44,6 @@ function showWelcomeScreen() {
             <div class="eyebrow">QUIERES ADQUIRIR</div>
             <img src="assets/05_GRAFISMO.svg" alt="Las 7 Mentalidades del Líder Retail" class="hero-grafismo">
             <p class="hero-copy">
-                Ideas prácticas para liderar, conectar y crear<br>experiencias que dejan huella.
             </p>
             <button class="cta" id="startButton">COMENZAR&nbsp; →</button>
             ${sponsors()}
